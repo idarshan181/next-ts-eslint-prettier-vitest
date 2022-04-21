@@ -6,7 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npm run lint:tsc && npm run lint:eslint && npm run lint:prettier",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:prettier": "prettier --check .",
+    "fix": "npm run fix:eslint && npm run fix:prettier",
+    "fix:eslint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+    "fix:prettier": "prettier --write .",
+    "lint:conflict": "eslint-config-prettier .eslintrc.json",
+    "postinstall": "typesync",
+    "check": "typesync && npm outdated && npm audit && npm run lint:conflict && npm run lint && npm run dev",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "next": "12.1.5",
@@ -17,8 +28,22 @@
     "@types/node": "17.0.25",
     "@types/react": "18.0.6",
     "@types/react-dom": "18.0.2",
-    "eslint": "8.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "@vitest/ui": "^0.9.4",
+    "autoprefixer": "^10.4.4",
+    "c8": "^7.11.2",
+    "eslint": "^8.13.0",
     "eslint-config-next": "12.1.5",
-    "typescript": "4.6.3"
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "postcss": "^8.4.12",
+    "postcss-cli": "^9.1.0",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.0.24",
+    "typescript": "4.6.3",
+    "typesync": "^0.9.0",
+    "vitest": "^0.9.4"
   }
 }
